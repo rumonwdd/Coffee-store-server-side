@@ -15,13 +15,16 @@ const AddCoffee = () => {
     const newCoffee = { name, chef, supplier, taste, category, detail, photo };
     console.log(newCoffee);
 
-    fetch("http://localhost:5000/addCoffie", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newCoffee),
-    })
+    fetch(
+      "https://coffie-store-clinet-hltydeeek-rumon-islams-projects.vercel.app/addCoffie",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newCoffee),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -59,7 +62,8 @@ const AddCoffee = () => {
             <input
               className="input w-full"
               type="text"
-              name="name" defaultValue="Rumon islam"
+              name="name"
+              defaultValue="Rumon islam"
               placeholder="Name of coffee"
               required
             />
@@ -71,7 +75,7 @@ const AddCoffee = () => {
               className="input w-full"
               type="text"
               name="chef"
-              defaultValue='Give me some discount'
+              defaultValue="Give me some discount"
               placeholder="Enter the chef of coffee"
               required
             />
@@ -86,7 +90,7 @@ const AddCoffee = () => {
             <input
               className="input w-full"
               type="text"
-              defaultValue='my supplier is the best'
+              defaultValue="my supplier is the best"
               name="supplier"
               placeholder="Enter your supplier"
               required
@@ -98,7 +102,7 @@ const AddCoffee = () => {
             <input
               className="input w-full"
               type="text"
-              defaultValue='Sweet'
+              defaultValue="Sweet"
               name="taste"
               placeholder="Enter your taste"
               required
@@ -114,7 +118,7 @@ const AddCoffee = () => {
             <input
               className="input w-full"
               type="text"
-              defaultValue='my category is the best'
+              defaultValue="my category is the best"
               name="category"
               placeholder="Enter your category"
               required
@@ -127,7 +131,7 @@ const AddCoffee = () => {
               className="input w-full"
               type="text"
               name="detail"
-              defaultValue='this is the best coffee in the world'
+              defaultValue="this is the best coffee in the world"
               placeholder="Enter your detail"
               required
             />

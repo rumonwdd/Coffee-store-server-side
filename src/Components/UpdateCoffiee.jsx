@@ -1,63 +1,64 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 const UpdateCoffiee = () => {
-
   const coffee = useLoaderData();
 
-  const {_id, name , chef, supplier, taste, category, detail, photo} = coffee;
+  const { _id, name, chef, supplier, taste, category, detail, photo } = coffee;
 
   const handleUpdateCoffee = (event) => {
-      event.preventDefault();
-      const form = event.target;
-      const name = form.name.value;
-      const chef = form.chef.value;
-      const supplier = form.supplier.value;
-      const taste = form.taste.value;
-      const category = form.category.value;
-      const detail = form.detail.value;
-      const photo = form.photo.value;
-  
-      const newCoffee = { name, chef, supplier, taste, category, detail, photo };
-      console.log(newCoffee);
-  
-      fetch(`http://localhost:5000/coffee/${_id}`, {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const chef = form.chef.value;
+    const supplier = form.supplier.value;
+    const taste = form.taste.value;
+    const category = form.category.value;
+    const detail = form.detail.value;
+    const photo = form.photo.value;
+
+    const newCoffee = { name, chef, supplier, taste, category, detail, photo };
+    console.log(newCoffee);
+
+    fetch(
+      `https://coffie-store-clinet-hltydeeek-rumon-islams-projects.vercel.app/coffee/${_id}`,
+      {
         method: "PUT",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify(newCoffee),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.modifiedCount>0) {
-            Swal.fire({
-              title: "Success!",
-              text: "The coffee updated successfully",
-              icon: "success",
-              confirmButtonText: "Cool",
-            });
-            form.reset();
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
           Swal.fire({
-            title: "Error!",
-            text: "Failed to add coffee",
-            icon: "error",
-            confirmButtonText: "Try Again",
+            title: "Success!",
+            text: "The coffee updated successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
           });
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to add coffee",
+          icon: "error",
+          confirmButtonText: "Try Again",
         });
-    };
-  
-
+      });
+  };
 
   return (
     <div className="p-32 bg-amber-50 border-3">
-      <h2 className="text-4xl font-extrabold text-center mb-4">Add an Coffee</h2>
+      <h2 className="text-4xl font-extrabold text-center mb-4">
+        Add an Coffee
+      </h2>
       <form onSubmit={handleUpdateCoffee}>
         <div className="flex mx-auto">
           {/* name and chef section */}
@@ -164,12 +165,12 @@ const UpdateCoffiee = () => {
             type="submit"
             className="w-full bg-amber-500 p-3 rounded-3xl mt-4"
           >
-            Update a  Coffee
+            Update a Coffee
           </button>
         </div>
       </form>
     </div>
   );
-}
+};
 
-export default UpdateCoffiee
+export default UpdateCoffiee;

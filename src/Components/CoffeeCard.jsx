@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee , coffiee, setCoffee }) => {
+const CoffeeCard = ({ coffee, coffiee, setCoffee }) => {
   const { _id, name, chef, supplier, taste, category, detail, photo } = coffee;
 
-  const handleDelete = _id => {
+  const handleDelete = (_id) => {
     console.log(_id);
     Swal.fire({
       title: "Are you sure?",
@@ -16,14 +16,16 @@ const CoffeeCard = ({ coffee , coffiee, setCoffee }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        
-        console.log('deleted confirmed')
-        fetch(`http://localhost:5000/coffees/${_id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        console.log("deleted confirmed");
+        fetch(
+          `https://coffie-store-clinet-hltydeeek-rumon-islams-projects.vercel.app/coffees/${_id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -33,14 +35,12 @@ const CoffeeCard = ({ coffee , coffiee, setCoffee }) => {
                 text: "Your coffee has been deleted.",
                 icon: "success",
               });
-              const remaining = coffiee.filter(cof => cof._id !== _id);
+              const remaining = coffiee.filter((cof) => cof._id !== _id);
               setCoffee(remaining);
             }
           });
       }
     });
-    
-      
   };
 
   return (

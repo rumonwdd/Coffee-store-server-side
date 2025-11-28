@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function App() {
   const coffees = useLoaderData();
-  const [coffiee, setCoffee] = useState(coffees);
+  const [coffee, setCoffee] = useState(coffees);
 
   return (
     <>
@@ -12,9 +12,10 @@ function App() {
         <h1 className="font-bold text-5xl text-center my-5">Hot Hot cold coffee :{coffees.length} </h1>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {coffees.map((coffee) => (
-            <CoffeeCard key={coffee._id} coffee={coffee}
-            coffiee={coffiee}
+          {
+          coffees.map((coffeeItem) => (
+            <CoffeeCard key={coffeeItem._id} coffee={coffeeItem}
+            allCoffees={coffee}
             setCoffee={setCoffee}></CoffeeCard>
           ))}
         </div>
